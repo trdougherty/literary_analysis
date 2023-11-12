@@ -1,0 +1,233 @@
+body, html {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Other styles remain unchanged */
+
+/* Other styles remain unchanged */
+
+.container {
+    display: grid;
+    grid-template-columns: 3fr 2fr; /* 3 parts for the chart, 2 parts for the info box */
+    grid-template-rows: auto 1fr; /* Auto for the controls, remaining space for the chart */
+    grid-template-areas: 
+        "controls info"
+        "chart info"; /* Define the grid areas */
+    height: 95vh;
+    padding: 20px;
+    gap: 10px; /* Adjust gap as needed */
+    overflow: hidden; /* To prevent any scrolling */
+}
+
+.controls {
+    grid-area: controls;
+    /* No changes needed here */
+}
+
+#chart {
+    grid-area: chart;
+    /* Ensure the chart fills its container vertically */
+    height: 100%;
+    /* Remove any specific height setting if it was set previously to let it fill the space */
+}
+
+#infoBox {
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* Auto for the header, 1fr for content, auto for the divider */
+    grid-template-columns: 1fr; /* One column layout */
+    grid-template-areas:
+        "title"
+        "content"
+        "divider";
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box; /* Include padding in the height calculation */
+    overflow: hidden; /* Prevents any content from overflowing outside the infoBox */
+}
+
+#bookInfo {
+    grid-area: title;
+    /* Styles for bookInfo */
+}
+
+#hoverInfo {
+    grid-area: content;
+    /* Styles for hoverInfo */
+}
+
+#infoDivider {
+    grid-area: divider;
+    /* Styles for infoDivider */
+}
+
+/* Make sure the content area takes up the remaining space and places items in the center */
+#hoverInfo {
+    grid-area: content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow-y: auto;
+}
+
+/* Divider line styling */
+#infoDivider {
+    grid-area: divider;
+    border: none; /* Remove border */
+    height: 2px; /* Height of the horizontal line */
+    background: rgba(0, 0, 0, 0.1);
+    margin: 0; /* Reset margin */
+}
+
+#infoText {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* This will center the content vertically */
+    text-align: center;
+    padding: 10px; /* Add some padding if needed */
+    box-sizing: border-box;
+    overflow: auto; /* In case the content overflows */
+}
+
+/* Adjust the dropdowns and slider to the full width of the left side */
+.controls select, .controls input[type="range"], .controls span {
+    width: calc(100% - 20px); /* Adjust the width based on padding */
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+
+/* Extend grid-template-columns for a full-length slider */
+.controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns for the dropdowns */
+    grid-template-rows: auto auto auto; /* Three rows: labels, dropdowns, and slider */
+    gap: 10px; /* Space between the grid items */
+    align-items: center; /* Align items vertically in the center */
+}
+
+/* Style adjustments for the slider label */
+.controls label {
+    font-size: 0.9em; /* Smaller font size for captions */
+    color: #555; /* Dark grey color for text */
+    margin-bottom: 5px; /* Space between caption and select box or slider */
+}
+
+/* Ensure select elements are 100% width of their cell */
+.controls select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+/* Adjust styles for other control elements as needed */
+
+/* If you are using additional spans or elements, you may need to adjust their styling as well */
+
+  /* Adding a custom arrow to the select elements */
+  .controls select {
+    background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+                      linear-gradient(135deg, gray 50%, transparent 50%),
+                      linear-gradient(to right, #ddd, #ddd);
+    background-position: calc(100% - 20px) calc(1em + 2px),
+                         calc(100% - 15px) calc(1em + 2px),
+                         calc(100% - 2.5em) 0.5em;
+    background-size: 5px 5px, 5px 5px, 1px 1.5em;
+    background-repeat: no-repeat;
+  }
+  
+  /* Styling the select element when focused */
+  .controls select:focus {
+    outline: none;
+    border-color: #a0a0a0;
+    box-shadow: 0 0 3px 2px rgba(0, 100, 250, 0.2);
+  }
+  
+  /* Styling the select element when hovered */
+  .controls select:hover {
+    border-color: #888;
+  }
+  
+  /* Adjust label styles */
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+/* Slider styles */
+.controls input[type="range"] {
+    grid-column: 1 / -1; /* Span across all columns */
+    padding: 10px 0; /* Padding for visual comfort */
+    width: 100%; /* Full-width */
+    background: #e4e4e4; /* Light grey background */
+    cursor: pointer; /* Cursor on hover */
+    border-radius: 5px; /* Rounded corners for the slider */
+    height: 5px; /* Specified height of the track */
+  }
+  
+  /* Styles for the slider thumb for Webkit browsers */
+  .controls input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    height: 20px; /* Height of the thumb */
+    width: 20px; /* Width of the thumb */
+    background: #cccccc; /* Grey background for the thumb */
+    cursor: pointer; /* Cursor on hover */
+    border-radius: 50%; /* Circular thumb */
+    border: 1px solid #aaaaaa; /* Slight border for the thumb */
+  }
+  
+  /* Styles for the slider thumb for Mozilla browsers */
+  .controls input[type="range"]::-moz-range-thumb {
+    height: 20px; /* Height of the thumb */
+    width: 20px; /* Width of the thumb */
+    background: #cccccc; /* Grey background for the thumb */
+    cursor: pointer; /* Cursor on hover */
+    border-radius: 50%; /* Circular thumb */
+    border: 1px solid #aaaaaa; /* Slight border for the thumb */
+  }
+  
+  .info-icon-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px; /* Adjust width as needed */
+    height: 25px; /* Adjust height as needed */
+  }
+  
+  .info-icon-container img {
+    width: 100%;
+    height: auto;
+    display: block; /* This will remove any extra space beneath the image */
+  }
+  
+/* Overlay styles */
+#infoPopup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed position */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+    z-index: 1000; /* Make sure it's on top of everything */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Content styles within the popup */
+  #infoPopupContent {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    margin: auto;
+    max-width: 600px; /* Maximum width of the content box */
+  }
+
+  #sliderValue {
+    display: none;
+}

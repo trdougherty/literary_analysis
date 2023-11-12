@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Plot</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="info-icon-container">
+            <img src="./info.png" alt="Info" id="infoIcon" />
+        </div>
+        <div class="controls">
+            <label for="dataset">Book:</label>
+            <label for="term">Emotion:</label>
+            <select id="dataset">
+                <option value="PG100001">Nineteen eighty-four</option>
+                <option value="PG100002">Anna Karenina</option>
+                <!-- Additional options... -->
+            </select>
+            <select id="term">
+                <option value="hope">Hope</option>
+                <option value="comfort">Comfort</option>
+                <option value="nostalgia">Nostalgia</option>
+                <option value="oppression">Oppression</option>
+                <option value="fear">Fear</option>
+                <!-- Additional options... -->
+            </select>
+            <label for="mySlider">Smoothness:</label>
+            <input type="range" min="15" max="150" value="50" id="mySlider">
+            <span id="sliderValue">50</span>
+        </div>
+        <div id="chart">
+            <!-- D3 will append the SVG chart here -->
+        </div>
+        <div id="infoBox">
+            <div id="bookInfo">
+                <h2 id="bookTitle">Llama-2</h2>
+                <p id="bookDetails"></p>
+            </div>
+            <hr id="infoDivider"/>
+        </div>
+        <div id="infoText"></div>
+          
+    </div>
+    <div id="infoPopup">
+        <div id="infoPopupContent">
+        <p>This small project is an attempt to visualize something many of us have felt or experienced - the ways in which a book might make us feel. To do this, I borrowed some recent advancements in the computer science world of Natural Language Processing. Facebook's large language model BART lies at the core of this project for two primary tasks. The first is to classify which emotion is likely represented in each chunk of text, and the next is to summarize some random paragraphs to give the reader a way to interact with the psychology of the model. The code is publicly available for your convenience at <a href="https://github.com/trdougherty/literary_analysis" target="_blank">this github repository</a></p>
+        <br></br>
+        <p>
+        My Info <a href="https://www.linkedin.com/in/thomasryundougherty/" target="_blank">https://www.linkedin.com/in/thomasryundougherty/</a>
+        </p>
+        </div>
+      </div>
+    <script src="./script.js"></script>
+</body>
+</html>
