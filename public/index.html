@@ -6,14 +6,14 @@
 
     <title>Read me a book, ChatGPT</title>
     <meta name="description" content="This project visualizes the progression of complex concepts through the course of a book.">
-    <meta property="og:title" content="Read me a Book, ChatGPT">
+    <meta property="og:title" content="Book Club with ChatGPT">
     <meta property="og:description" content="This project visualizes the progression of complex concepts through the course of a book.">
     <meta property="og:url" content="https://literary-study-ef4e1b99097c.herokuapp.com/">
-    <!-- <meta property="og:image" content="https://link-to-your-image.com/image.jpg">
-    <meta name="twitter:title" content="Interactive Plot">
-    <meta name="twitter:description" content="Explore interactive visualizations of data plots">
-    <meta name="twitter:image" content="https://link-to-your-image.com/image.jpg">
-    <meta name="twitter:card" content="summary_large_image"> -->
+    <meta property="og:image" content="https://github.com/trdougherty/literary_analysis/blob/main/public/oppression.png">
+    <meta name="twitter:title" content="Book Club with ChatGPT">
+    <meta name="twitter:description" content="Visual interpretation of concept progressions in books.">
+    <meta name="twitter:image" content="https://github.com/trdougherty/literary_analysis/blob/main/public/oppression.png">
+    <meta name="twitter:card" content="This project visualizes the progression of complex concepts through the course of a book.">
 
     <link rel="stylesheet" href="./styles.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="controls">
                     <label for="dataset">Book:</label>
-                    <label for="term">Emotion:</label>
+                    <label for="term">Concept:</label>
                     <select id="dataset">
                         <option value="PG100001">Nineteen Eighty-Four</option>
                         <option value="PG100002">Anna Karenina</option>
@@ -111,7 +111,7 @@
         <p>Thanks so much for visiting my site! This project is not meant to be viewed on mobile devices. For the full experience please view on a desktop or laptop computer.</p>
         <h2>About the Project</h2>
         <p>This work attempts to visualize something many of us have felt or experienced - the ways in which a book might make us feel. To study this, I borrowed some recent advancements in the computer science world of Natural Language Processing. Facebook's large language model BART lies at the core of this project for two primary tasks. By plotting these points out and examining a moving average of their behavior, we can get a sense of how concepts are growing and evolving through the course of the book. As an example, the chart below shows the progression of the concept of "oppression" through the course of George Orwell's 1984.</p>
-        
+
         <figure>
             <img src="./oppression.png" alt="Oppression" style="width: 100%; height: auto;">
             <figcaption>The image above is chaotic, with a number of sharp hills and valleys in the plot. By applying a moving average to the data, we can smooth out the plot and get a better sense of the overall trend.</figcaption>
