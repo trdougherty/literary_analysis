@@ -17,10 +17,10 @@ function highlightElement(element) {
     overlay.style.left = `${rect.left + window.scrollX - buffer}px`; // Position left of the element with buffer
 }
 
-function positionPopup(x, y) {
+function positionPopup(position) {
     const popup = document.querySelector('.popup');
-    popup.style.left = x + 'px';
-    popup.style.top = y + 'px';
+    popup.style.top = position.top;
+    popup.style.left = position.left;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -36,71 +36,61 @@ document.addEventListener('DOMContentLoaded', function () {
             title: 'Peaks and Valleys of Literary Emotion', 
             content: 'This small project is meant to help highlight the ebbs and flows of emotions through great books. I hope you enjoy it! First, how to use the system...', 
             selector: '.nextButton', // Selects the div with class 'controls'
-            x: 950, 
-            y: 400 
+            position: { top: '50vh', left: '70vw' } // Example of using viewport units
         },
         { 
             title: 'Control Panel', 
             content: 'This section is the main way you can interact with this system.', 
             selector: '.controls', // Selects the div with class 'controls'
-            x: 800, 
-            y: 200 
+            position: { top: '50vh', left: '70vw' } // Example of using viewport units
         },
         { 
             title: 'Book Selection', 
             content: 'The dropdown menu here has some precomputed books available for analysis.', 
             selector: '#dataset', // Selects the element with id 'dataset'
-            x: 800, 
-            y: 170 
+            position: { top: '50vh', left: '70vw' } // Example of using viewport units
         },
         { 
             title: 'Concept Selection', 
             content: 'By selecting a concept, the graph will update to show you the progression of the concept through the book.', 
             selector: '#term', // Selects the element with id 'term'
-            x: 400, 
-            y: 130 
+            position: { top: '50vh', left: '70vw' } // Example of using viewport units
         },
         { 
             title: 'Moving Average', 
             content: 'The dark line on the graph represents a moving average of emotion in the surrounding sections. By increasing or decreasing this slider, you can zoom in on local trends or smooth out macroscopic patterns.', 
             selector: '#mySlider', // Selects the element with id 'mySlider'
-            x: 500, 
-            y: 400 
+            position: { top: '50vh', left: '70vw' } // Example of using viewport units
         },
         { 
             title: 'Moving Average Plot', 
             content: 'With less smoothing, extreme values are more visible. Peaks and valleys are more pronounced, indicating that the concept is more prominent in those sections. Greater smoothing shows long term trends, and is useful for seeing how the concept changes over the course of the book.', 
             selector: '.moving-average', // Selects the element with id 'mySlider'
-            x: 900, 
-            y: 400 
+            position: { top: '50vh', left: '70vw' } // Example of using viewport units
         },
         { 
             title: 'Interacting with the Graph', 
             content: 'The graph is filled with little dots, each of which represent how the section scored for the emotion. The sections with larger circles around them have an automatic summary associated with them, which can be seen by hovering over the circle.', 
             selector: '#chart', // Selects the element with id 'mySlider'
-            x: 1000, 
-            y: 800 
+            position: { top: '50vh', left: '70vw' } // Example of using viewport units
         },
         { 
             title: 'Section Summaries', 
             content: 'When hovering over a dot, this section will populate with a brief summary of the contents in this section.', 
             selector: '#infoText', // Selects the element with id 'mySlider'
-            x: 1400, 
-            y: 400 
+            position: { top: '50vh', left: '70vw' } // Example of using viewport units
         },
         { 
             title: 'Book Information', 
             content: 'For the book selected, some information about the book is presented in this section, including a famous quote from the book.', 
             selector: '#infoBox', // Selects the element with id 'mySlider'
-            x: 1700, 
-            y: 350 
+            position: { top: '50vh', left: '70vw' } // Example of using viewport units
         },
         { 
             title: 'Additional Information', 
             content: 'For links to the project Github, information about me, and motivation for the project, click this icon.', 
             selector: '.info-icon-container', // Selects the element with id 'mySlider'
-            x: 1700, 
-            y: 150 
+            position: { top: '50vh', left: '70vw' } // Example of using viewport units
         }
     ];
 
@@ -125,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
             // Position the popup based on the current step's coordinates
-            positionPopup(currentStep.x, currentStep.y);
+            positionPopup(currentStep.position);
         } else {
             // Hide the popup and overlay when there are no more steps
             document.querySelector('.overlay-container').style.display = 'none';
