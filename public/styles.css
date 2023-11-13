@@ -2,7 +2,7 @@
 .mobile-content {
     display: none;
     text-align: center; /* Center text horizontally */
-    padding: 60px; /* Add padding around the content */
+    padding: 20px; /* Add padding around the content */
     box-sizing: border-box; /* Include padding in the width calculation */
 }
 
