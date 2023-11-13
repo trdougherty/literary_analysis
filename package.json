@@ -1,0 +1,24 @@
+{
+  "name": "literary_analysis",
+  "version": "1.0.0",
+  "description": "Easily generate a local, up-to-date copy of the Standardized Project Gutenberg Corpus (SPGC).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trdougherty/literary_analysis.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trdougherty/literary_analysis/issues"
+  },
+  "homepage": "https://github.com/trdougherty/literary_analysis#readme",
+  "dependencies": {
+    "d3": "^7.8.5",
+    "express": "^4.18.2"
+  }
+}
