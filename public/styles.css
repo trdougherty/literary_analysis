@@ -260,7 +260,7 @@ label {
 
 #highlightOverlay {
     position: absolute;
-    border: 4px solid orange; /* Adjust the border size and color as needed */
+    border: 5px solid #f4a261; /* Adjust the border size and color as needed */
     border-radius: 10px;
     box-sizing: border-box;
     display: none; /* Initially hidden */
