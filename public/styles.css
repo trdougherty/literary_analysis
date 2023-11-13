@@ -138,6 +138,9 @@ html {
     border-radius: 5px;
     border: 1px solid #ccc;
     background-color: #ffffff68;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 /* Slider styles */

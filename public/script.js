@@ -1,5 +1,5 @@
 // Define the margins of the chart
-const margin = { top: 15, right: 50, bottom: 88, left: 30 };
+const margin = { top: 15, right: 50, bottom: 95, left: 30 };
 let svg; // Declare svg here to make it accessible in the global scope
 let width, height; // Declare width and height here for global access
 let timeoutId;
