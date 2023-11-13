@@ -3,6 +3,159 @@ const margin = { top: 15, right: 50, bottom: 95, left: 30 };
 let svg; // Declare svg here to make it accessible in the global scope
 let width, height; // Declare width and height here for global access
 let timeoutId;
+let step = 1;
+
+function highlightElement(element) {
+    const overlay = document.getElementById('highlightOverlay');
+    const rect = element.getBoundingClientRect();
+    const buffer = 10; // 10px buffer, adjust as needed
+
+    overlay.style.display = 'block'; // Show the overlay
+    overlay.style.width = `${rect.width + buffer * 2}px`; // Add buffer to width
+    overlay.style.height = `${rect.height + buffer * 2}px`; // Add buffer to height
+    overlay.style.top = `${rect.top + window.scrollY - buffer}px`; // Position above the element with buffer
+    overlay.style.left = `${rect.left + window.scrollX - buffer}px`; // Position left of the element with buffer
+}
+
+function positionPopup(x, y) {
+    const popup = document.querySelector('.popup');
+    popup.style.left = x + 'px';
+    popup.style.top = y + 'px';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const backButton = document.getElementById('backButton');
+    const nextButton = document.getElementById('nextButton');
+    const popup = document.querySelector('.popup');
+    const popupTitle = popup.querySelector('h1');
+    const popupContent = popup.querySelector('p');
+
+    // Define the content for each step
+    const steps = [
+        { 
+            title: 'Peaks and Valleys of Literary Emotion', 
+            content: 'This small project is meant to help highlight the ebbs and flows of emotions through great books. I hope you enjoy it! First, how to use the system...', 
+            selector: '.nextButton', // Selects the div with class 'controls'
+            x: 950, 
+            y: 400 
+        },
+        { 
+            title: 'Control Panel', 
+            content: 'This section is the main way you can interact with this system.', 
+            selector: '.controls', // Selects the div with class 'controls'
+            x: 800, 
+            y: 200 
+        },
+        { 
+            title: 'Book Selection', 
+            content: 'The dropdown menu here has some precomputed books available for analysis.', 
+            selector: '#dataset', // Selects the element with id 'dataset'
+            x: 800, 
+            y: 170 
+        },
+        { 
+            title: 'Concept Selection', 
+            content: 'By selecting a concept, the graph will update to show you the progression of the concept through the book.', 
+            selector: '#term', // Selects the element with id 'term'
+            x: 400, 
+            y: 130 
+        },
+        { 
+            title: 'Moving Average', 
+            content: 'The dark line on the graph represents a moving average of emotion in the surrounding sections. By increasing or decreasing this slider, you can zoom in on local trends or smooth out macroscopic patterns.', 
+            selector: '#mySlider', // Selects the element with id 'mySlider'
+            x: 500, 
+            y: 400 
+        },
+        { 
+            title: 'Moving Average Plot', 
+            content: 'With less smoothing, extreme values are more visible. Peaks and valleys are more pronounced, indicating that the concept is more prominent in those sections. Greater smoothing shows long term trends, and is useful for seeing how the concept changes over the course of the book.', 
+            selector: '.moving-average', // Selects the element with id 'mySlider'
+            x: 900, 
+            y: 400 
+        },
+        { 
+            title: 'Interacting with the Graph', 
+            content: 'The graph is filled with little dots, each of which represent how the section scored for the emotion. The sections with larger circles around them have an automatic summary associated with them, which can be seen by hovering over the circle.', 
+            selector: '#chart', // Selects the element with id 'mySlider'
+            x: 1000, 
+            y: 800 
+        },
+        { 
+            title: 'Section Summaries', 
+            content: 'When hovering over a dot, this section will populate with a brief summary of the contents in this section.', 
+            selector: '#infoText', // Selects the element with id 'mySlider'
+            x: 1400, 
+            y: 400 
+        },
+        { 
+            title: 'Book Information', 
+            content: 'For the book selected, some information about the book is presented in this section, including a famous quote from the book.', 
+            selector: '#infoBox', // Selects the element with id 'mySlider'
+            x: 1900, 
+            y: 350 
+        },
+        { 
+            title: 'Additional Information', 
+            content: 'For links to the project Github, information about me, and motivation for the project, click this icon.', 
+            selector: '.info-icon-container', // Selects the element with id 'mySlider'
+            x: 1700, 
+            y: 150 
+        }
+    ];
+
+    function updateContent() {
+        const overlay = document.getElementById('highlightOverlay');
+        const nextButton = document.getElementById('nextButton');
+
+        const currentStep = steps[step - 1];
+        if (currentStep) {
+            popupTitle.textContent = currentStep.title;
+            popupContent.textContent = currentStep.content;
+
+            if (step === 1) {
+                nextButton.style.borderColor = 'orange';
+                overlay.style.display = 'none';
+            } else {
+                // Highlight the element related to the current step
+                nextButton.style.borderColor = 'transparent';
+                const elementToHighlight = document.querySelector(currentStep.selector);
+                if (elementToHighlight) {
+                    highlightElement(elementToHighlight);
+                }
+            }
+            // Position the popup based on the current step's coordinates
+            positionPopup(currentStep.x, currentStep.y);
+        } else {
+            // Hide the popup and overlay when there are no more steps
+            document.querySelector('.overlay-container').style.display = 'none';
+        }
+    }
+
+    // Initial content
+    updateContent();
+
+    // Show the popup and overlay when the page loads
+    document.querySelector('.overlay-container').style.display = 'flex';
+    popup.style.display = 'block'; // or 'flex', depending on your layout
+
+    // Handle "Next" button click
+    nextButton.addEventListener('click', function () {
+        console.log("Next button clicked")
+        step++;
+        updateContent();
+    });
+
+    // Handle "Back" button click
+    backButton.addEventListener('click', function () {
+        console.log("Back button clicked")
+        if (step > 1) {
+            step--;
+            updateContent();
+        }
+    });
+});
+
 
 // JavaScript to toggle the popup
 document.addEventListener('DOMContentLoaded', function () {
@@ -134,7 +287,7 @@ function loadDataset(datasetName, termValue, sliderValue) {
             .merge(path)
             .attr('d', smoothedLine)
             .attr('fill', 'none')
-            .attr('stroke', 'black')
+            .attr('stroke', "#4A4E69")
             .attr('stroke-width', 3)
             .style('opacity', 1);
 
@@ -149,9 +302,9 @@ function loadDataset(datasetName, termValue, sliderValue) {
             .attr('cy', (d, i) => yScale(data.y[i]))
             .attr('r', 3)
             .attr('fill', 'none')
-            .attr('stroke', 'black')
+            .attr('stroke', '#C9ADA7')
             .attr('stroke-width', 2)
-            .style('opacity', 0.1);
+            .style('opacity', 0.3);
 
         circles.exit().remove();
 
@@ -169,7 +322,7 @@ function loadDataset(datasetName, termValue, sliderValue) {
                 .attr("cy", d => yScale(data.y[data.x.indexOf(d)]))
                 .attr("r", 15)
                 .attr("fill", "rgba(0, 0, 0, 0)")
-                .attr("stroke", "#3793FF")
+                .attr("stroke", "#9A8C98")
                 .attr("stroke-width", 3)
                 .style("opacity", 0.7)
                 .on("mouseover", (event, d) => {
@@ -232,6 +385,7 @@ function loadDataset(datasetName, termValue, sliderValue) {
 // Initial load
 loadDataset("PG100001", "hope", 50);
 updateBookTitle("PG100001");
+
 
 // function typeText(element, text) {
 //     let i = 0;
