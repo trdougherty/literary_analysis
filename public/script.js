@@ -1,5 +1,5 @@
 // Define the margins of the chart
-const margin = { top: 15, right: 50, bottom: 95, left: 30 };
+const margin = { top: 15, right: 50, bottom: 110, left: 30 };
 let svg; // Declare svg here to make it accessible in the global scope
 let width, height; // Declare width and height here for global access
 let timeoutId;
@@ -356,7 +356,7 @@ function loadDataset(datasetName, termValue, sliderValue) {
         if (xAxisGroup.empty()) {
             xAxisGroup = svg.append("g")
                 .attr("class", "x-axis-group")
-                .attr("transform", `translate(0, ${height - margin.bottom + margin.top})`);
+                .attr("transform", `translate(0, ${height - margin.bottom})`);
         }
         xAxisGroup.call(xAxis);
         xAxisGroup.selectAll("text")

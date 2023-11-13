@@ -65,17 +65,23 @@
     </div>
     <div id="infoPopup">
         <div id="infoPopupContent">
-        <p>This small project is an attempt to visualize something many of us have felt or experienced - the ways in which a book might make us feel. To do this, I borrowed some recent advancements in the computer science world of Natural Language Processing. Facebook's large language model BART lies at the core of this project for two primary tasks. The first is to classify which emotion is likely represented in each chunk of text, and the next is to summarize some random paragraphs to give the reader a way to interact with the psychology of the model. Details on the implementation and the full code is publicly available for your convenience at <a href="https://github.com/trdougherty/literary_analysis" target="_blank">this github repository</a></p>
-        <br></br>
-        <p>
-        My Info:
-        <br></br>
-        <a href="https://www.linkedin.com/in/thomasryundougherty/" target="_blank">LinkedIn</a>
-        <br></br>
-        <a href="https://substack.com/@thomasdougherty" target="_blank">Substack</a>
-        </p>
+            <h2>About the Project</h2>
+            <p>This small project is an attempt to visualize something many of us have felt or experienced - the ways in which a book might make us feel. To do this, I borrowed some recent advancements in the computer science world of Natural Language Processing. Facebook's large language model BART lies at the core of this project for two primary tasks.</p>
+            <p>First, each paragraph in the book is split into relatively uniform length sections. This is done to avoid large paragraphs overflowing the memory of the GPU. Next, a bart-large checkpoint pretrained on the MultiNLI dataset is loaded and tasked with classifying how each section scores compared to the selected concept.</p>
+            <p>By plotting these points out and examining a moving average of their behavior, we can get a sense of how concepts are growing and evolving through the course of the book. Details on the implementation and the full code is publicly available for your convenience at <a href="https://github.com/trdougherty/literary_analysis" target="_blank">this GitHub repository</a>.</p>
+            
+            <h2>Contact Information</h2>
+            <p>For more information, connect with me on social media:</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/thomasryundougherty/" target="_blank">
+                    <img src="./linkedin-icon.png" alt="LinkedIn" style="width: 24px; height: 24px;"> LinkedIn
+                </a>
+                <a href="https://substack.com/@thomasdougherty" target="_blank">
+                    <img src="./substack-icon.png" alt="Substack" style="width: 24px; height: 24px;"> Substack
+                </a>
+            </div>
         </div>
-      </div>
+    </div>
     <script src="./script.js"></script>
 </body>
 </html>
