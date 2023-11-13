@@ -1,5 +1,5 @@
 // Define the margins of the chart
-const margin = { top: 15, right: 50, bottom: 100, left: 30 };
+const margin = { top: 15, right: 50, bottom: 120, left: 30 };
 let svg; // Declare svg here to make it accessible in the global scope
 let width, height; // Declare width and height here for global access
 let timeoutId;
@@ -23,6 +23,33 @@ function positionPopup(position) {
     popup.style.left = position.left;
 }
 
+// Function to draw the chart
+function drawChart() {
+    // Reference the container div
+    const containerDiv = document.querySelector('.container');
+
+    // Calculate the width and height for the SVG
+    const currentWidth = containerDiv.clientWidth;
+    const currentHeight = containerDiv.clientHeight - margin.top - margin.bottom;
+
+    // Remove the existing svg if it exists
+    if (svg) {
+        svg.remove();
+    }
+
+    // Create the SVG element with adjusted width and height
+    svg = d3.select("#chart")
+        .append("svg")
+        .attr("width", currentWidth)
+        .attr("height", currentHeight)
+        .append("g")
+        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+    // Your existing code to draw the chart goes here
+    // ...
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const backButton = document.getElementById('backButton');
     const nextButton = document.getElementById('nextButton');
@@ -36,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
             title: 'Peaks and Valleys of Literary Emotion', 
             content: 'This small project is meant to help highlight the ebbs and flows of emotions through great books. I hope you enjoy it! First, how to use the system...', 
             selector: '.nextButton', // Selects the div with class 'controls'
-            position: { top: '50vh', left: '70vw' } // Example of using viewport units
+            position: { top: '50vh', left: '40vw' } // Example of using viewport units
         },
         { 
             title: 'Control Panel', 
@@ -48,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
             title: 'Book Selection', 
             content: 'The dropdown menu here has some precomputed books available for analysis.', 
             selector: '#dataset', // Selects the element with id 'dataset'
-            position: { top: '50vh', left: '70vw' } // Example of using viewport units
+            position: { top: '30vh', left: '70vw' } // Example of using viewport units
         },
         { 
             title: 'Concept Selection', 
@@ -66,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
             title: 'Moving Average Plot', 
             content: 'With less smoothing, extreme values are more visible. Peaks and valleys are more pronounced, indicating that the concept is more prominent in those sections. Greater smoothing shows long term trends, and is useful for seeing how the concept changes over the course of the book.', 
             selector: '.moving-average', // Selects the element with id 'mySlider'
-            position: { top: '50vh', left: '70vw' } // Example of using viewport units
+            position: { top: '30vh', left: '50vw' } // Example of using viewport units
         },
         { 
             title: 'Interacting with the Graph', 
@@ -78,19 +105,19 @@ document.addEventListener('DOMContentLoaded', function () {
             title: 'Section Summaries', 
             content: 'When hovering over a dot, this section will populate with a brief summary of the contents in this section.', 
             selector: '#infoText', // Selects the element with id 'mySlider'
-            position: { top: '50vh', left: '70vw' } // Example of using viewport units
+            position: { top: '50vh', left: '60vw' } // Example of using viewport units
         },
         { 
             title: 'Book Information', 
             content: 'For the book selected, some information about the book is presented in this section, including a famous quote from the book.', 
             selector: '#infoBox', // Selects the element with id 'mySlider'
-            position: { top: '50vh', left: '70vw' } // Example of using viewport units
+            position: { top: '35vh', left: '65vw' } // Example of using viewport units
         },
         { 
             title: 'Additional Information', 
             content: 'For links to the project Github, information about me, and motivation for the project, click this icon.', 
             selector: '.info-icon-container', // Selects the element with id 'mySlider'
-            position: { top: '50vh', left: '70vw' } // Example of using viewport units
+            position: { top: '30vh', left: '75vw' } // Example of using viewport units
         }
     ];
 
@@ -104,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
             popupContent.textContent = currentStep.content;
 
             if (step === 1) {
-                nextButton.style.borderColor = 'orange';
+                nextButton.style.borderColor = '#f4a261';
                 overlay.style.display = 'none';
             } else {
                 // Highlight the element related to the current step
@@ -336,12 +363,15 @@ function loadDataset(datasetName, termValue, sliderValue) {
         });
 
 
-        // Update the x-axis
+        // Define the x-axis label text
+        const xAxisLabel = "Book Section"; // Replace with your actual label
+
+        // Define and draw the x-axis
         const xAxis = d3.axisBottom(xScale)
             .ticks(5)
             .tickFormat(d3.format("d"));
 
-        // Check if x-axis exists, otherwise create
+        // Check if x-axis group exists, otherwise create
         let xAxisGroup = svg.select(".x-axis-group");
         if (xAxisGroup.empty()) {
             xAxisGroup = svg.append("g")
@@ -350,7 +380,23 @@ function loadDataset(datasetName, termValue, sliderValue) {
         }
         xAxisGroup.call(xAxis);
         xAxisGroup.selectAll("text")
-            .style("font-size", "16px");  // Adjust this value to your desired font size
+            .style("font-size", "20px"); // Adjust this value to your desired font size
+
+        // Check if x-axis label exists, otherwise append it
+        let xLabel = svg.select(".x-axis-label");
+        if (xLabel.empty()) {
+            svg.append("text")
+                .attr("class", "x-axis-label")
+                .attr("x", width / 2) // Center the label within the entire SVG width
+                .attr("y", height - (margin.bottom / 2)) // Position it above the bottom margin
+                .style("text-anchor", "middle") // Center the text
+                .style("font-size", "20px") // Adjust the font size as needed
+                .text(xAxisLabel);
+        } else {
+            // If the label already exists, update its position
+            xLabel.attr("x", width / 2)
+                .attr("y", height - (margin.bottom / 2));
+        }
 
         // Update the y-axis
         const yAxis = d3.axisLeft(yScale)
@@ -368,7 +414,7 @@ function loadDataset(datasetName, termValue, sliderValue) {
 
         // Adjust the font size here
         yAxisGroup.selectAll("text")
-            .style("font-size", "16px"); // Adjust the font size as needed
+            .style("font-size", "20px"); // Adjust the font size as needed
     });
 }
 

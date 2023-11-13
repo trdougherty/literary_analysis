@@ -27,81 +27,113 @@
     </script>
 </head>
 <body>
-    <div class="overlay-container">
-        <div class="popup">
-            <h1></h1>
-            <p></p>
-        </div>
-        <div id="highlightOverlay"></div>      
-        <div class="button-container">
-            <button id="backButton" class="overlay-button">&#8592;</button>
-            <button id="nextButton" class="overlay-button">&#8594;</button>            
-        </div>
-    </div>
-    
-    <div class="master-container">
-        <div class="container">
-            <div class="info-icon-container">
-                <img src="./info.png" alt="Info" id="infoIcon" />
+    <div class="full-site-content">
+        <div class="overlay-container">
+            <div class="popup">
+                <h1></h1>
+                <p></p>
             </div>
-            <div class="controls">
-                <label for="dataset">Book:</label>
-                <label for="term">Emotion:</label>
-                <select id="dataset">
-                    <option value="PG100001">Nineteen Eighty-Four</option>
-                    <option value="PG100002">Anna Karenina</option>
-                    <!-- Additional options... -->
-                </select>
-                <select id="term">
-                    <option value="hope">Hope</option>
-                    <option value="comfort">Comfort</option>
-                    <!-- <option value="nostalgia">Nostalgia</option> -->
-                    <option value="oppression">Oppression</option>
-                    <option value="fear">Fear</option>
-                    <!-- Additional options... -->
-                </select>
-                <label for="mySlider">Smoothness:</label>
-                <input type="range" min="15" max="150" value="50" id="mySlider">
-                <span id="sliderValue"></span>
-            </div>
-            <div id="chart">
-                <!-- D3 will append the SVG chart here -->
+            <div id="highlightOverlay"></div>      
+            <div class="button-container">
+                <button id="backButton" class="overlay-button">&#8592;</button>
+                <button id="nextButton" class="overlay-button">&#8594;</button>            
             </div>
         </div>
-        <div class="container2">
-            <div id="infoBox">
-                <div id="bookInfo">
-                    <h2 id="bookTitle"></h2>
-                    <div id="bookAuthor"></div>
-                    <div id="bookYear"></div>
-                    <div id="bookGenre"></div>
-                    <div id="bookDetails"></div>
-                    <p id="bookQuote"></p>
+        
+        <div class="master-container">
+            <div class="container">
+                <div class="info-icon-container">
+                    <img src="./info.png" alt="Info" id="infoIcon" />
+                </div>
+                <div class="controls">
+                    <label for="dataset">Book:</label>
+                    <label for="term">Emotion:</label>
+                    <select id="dataset">
+                        <option value="PG100001">Nineteen Eighty-Four</option>
+                        <option value="PG100002">Anna Karenina</option>
+                        <!-- Additional options... -->
+                    </select>
+                    <select id="term">
+                        <option value="hope">Hope</option>
+                        <option value="comfort">Comfort</option>
+                        <!-- <option value="nostalgia">Nostalgia</option> -->
+                        <option value="oppression">Oppression</option>
+                        <option value="fear">Fear</option>
+                        <!-- Additional options... -->
+                    </select>
+                    <label for="mySlider">Smoothness:</label>
+                    <input type="range" min="15" max="150" value="50" id="mySlider">
+                    <span id="sliderValue"></span>
+                </div>
+                <div id="chart">
+                    <!-- D3 will append the SVG chart here -->
                 </div>
             </div>
-            <div id="infoText"></div>
-        </div>
-    </div>
-    <div id="infoPopup">
-        <div id="infoPopupContent">
-            <h2>About the Project</h2>
-            <p>Hi, my name is Thomas, welcome to my books project! This work attempts to visualize something many of us have felt or experienced - the ways in which a book might make us feel. How do great authors use cadence of emotions to make you laugh and then cry, and are there universal patterns for what "great" writing looks like?</p> 
-            <p>To study this, I borrowed some recent advancements in the computer science world of Natural Language Processing. Facebook's large language model BART lies at the core of this project for two primary tasks.</p>
-            <!-- <p>First, each paragraph in the book is split into relatively uniform length sections. This is done to avoid large paragraphs overflowing the memory of the GPU. Next, a bart-large checkpoint pretrained on the MultiNLI dataset is loaded and tasked with classifying how each section scores compared to the selected concept.</p> -->
-            <p>By plotting these points out and examining a moving average of their behavior, we can get a sense of how concepts are growing and evolving through the course of the book. Details on the implementation and the full code is publicly available for your convenience at <a href="https://github.com/trdougherty/literary_analysis" target="_blank">this GitHub repository</a>.</p>
-            
-            <h2>Contact Information</h2>
-            <p>For more information, connect with me on social media:</p>
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/thomasryundougherty/" target="_blank">
-                    <img src="./linkedin-icon.png" alt="LinkedIn" style="width: 24px; height: 24px;"> LinkedIn
-                </a>
-                <a href="https://substack.com/@thomasdougherty" target="_blank">
-                    <img src="./substack-icon.png" alt="Substack" style="width: 24px; height: 24px;"> Substack
-                </a>
+            <div class="container2">
+                <div id="infoBox">
+                    <div id="bookInfo">
+                        <h2 id="bookTitle"></h2>
+                        <div id="bookAuthor"></div>
+                        <div id="bookYear"></div>
+                        <div id="bookGenre"></div>
+                        <div id="bookDetails"></div>
+                        <p id="bookQuote"></p>
+                    </div>
+                </div>
+                <div id="infoText"></div>
             </div>
         </div>
+        <div id="infoPopup">
+            <div id="infoPopupContent">
+                <h2>About the Project</h2>
+                <p>Hi, my name is Thomas, welcome to my books project! This work attempts to visualize something many of us have felt or experienced - the ways in which a book might make us feel. How do great authors use cadence of emotions to make you laugh and then cry, and are there universal patterns for what "great" writing looks like?</p> 
+                <p>To study this, I borrowed some recent advancements in the computer science world of Natural Language Processing. Facebook's large language model BART lies at the core of this project for two primary tasks.</p>
+                <!-- <p>First, each paragraph in the book is split into relatively uniform length sections. This is done to avoid large paragraphs overflowing the memory of the GPU. Next, a bart-large checkpoint pretrained on the MultiNLI dataset is loaded and tasked with classifying how each section scores compared to the selected concept.</p> -->
+                <p>By plotting these points out and examining a moving average of their behavior, we can get a sense of how concepts are growing and evolving through the course of the book. Details on the implementation and the full code is publicly available for your convenience at <a href="https://github.com/trdougherty/literary_analysis" target="_blank">this GitHub repository</a>.</p>
+                
+                <h2>Contact Information</h2>
+                <p>For more information, connect with me on social media:</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/thomasryundougherty/" target="_blank">
+                        <img src="./linkedin-icon.png" alt="LinkedIn" style="width: 24px; height: 24px;"> LinkedIn
+                    </a>
+                    <a href="https://substack.com/@thomasdougherty" target="_blank">
+                        <img src="./substack-icon.png" alt="Substack" style="width: 24px; height: 24px;"> Substack
+                    </a>
+                </div>
+            </div>
+        </div>
+        <script src="./script.js"></script>
     </div>
-    <script src="./script.js"></script>
+    <!-- Mobile content -->
+    <div class="mobile-content">
+        <h2>Mobile</h2>
+        <p>Thanks so much for visiting my site! This project is not meant to be viewed on mobile devices. For the full experience please view on a desktop or laptop computer.</p>
+        <h2>About the Project</h2>
+        <p>This work attempts to visualize something many of us have felt or experienced - the ways in which a book might make us feel. To study this, I borrowed some recent advancements in the computer science world of Natural Language Processing. Facebook's large language model BART lies at the core of this project for two primary tasks. By plotting these points out and examining a moving average of their behavior, we can get a sense of how concepts are growing and evolving through the course of the book. As an example, the chart below shows the progression of the concept of "oppression" through the course of George Orwell's 1984.</p>
+        
+        <figure>
+            <img src="./oppression.png" alt="Oppression" style="width: 100%; height: auto;">
+            <figcaption>The image above is chaotic, with a number of sharp hills and valleys in the plot. By applying a moving average to the data, we can smooth out the plot and get a better sense of the overall trend.</figcaption>
+        </figure>
+        
+        <figure>
+            <img src="./oppression_smooth.png" alt="Oppression Smooth" style="width: 100%; height: auto;">
+            <figcaption>This image shows the same data as the first but with a moving average applied. The resulting plot is smoother, highlighting the overall trends more clearly and reducing the impact of short-term fluctuations.</figcaption>
+        </figure>
+
+        <p>Details on the implementation and the full code is publicly available for your convenience at <a href="https://github.com/trdougherty/literary_analysis" target="_blank">this GitHub repository</a>.</p>
+        
+        <h2>Contact Information</h2>
+        <p>For more information, connect with me on social media:</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/thomasryundougherty/" target="_blank">
+                <img src="./linkedin-icon.png" alt="LinkedIn" style="width: 24px; height: 24px;"> LinkedIn
+            </a>
+            <a href="https://substack.com/@thomasdougherty" target="_blank">
+                <img src="./substack-icon.png" alt="Substack" style="width: 24px; height: 24px;"> Substack
+            </a>
+        </div>
+    </div>
 </body>
 </html>

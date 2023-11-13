@@ -1,10 +1,53 @@
+/* Hide mobile content on larger screens by default */
+.mobile-content {
+    display: none;
+    text-align: center; /* Center text horizontally */
+    padding: 60px; /* Add padding around the content */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+/* CSS Media Query for Mobile Devices */
+@media screen and (max-width: 768px) {
+    /* Hide full site content on mobile */
+    .full-site-content {
+        display: none;
+    }
+
+    /* Show mobile content on mobile */
+    .mobile-content {
+        display: block;
+    }
+
+    /* Additional styling for mobile content */
+    .mobile-content img {
+        width: 100%; /* Make images responsive */
+        max-width: 400px; /* Limit maximum image width */
+        margin: 10px auto; /* Center images and add space between them */
+        display: block; /* Ensure images are block elements to center properly */
+    }
+
+    .mobile-content p {
+        margin-bottom: 20px;
+        font-size: 20px; /* Adjust text size for readability */
+    }
+}
+
+/* Ensure full site content is visible on larger screens */
+@media screen and (min-width: 769px) {
+    .full-site-content {
+        display: block;
+        height: 100%;
+    }
+}
+
 body,
 html {
     height: 100%;
     margin: 0;
     zoom: 105%;
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     background-color: #f4f4f4;
+    font-size: 20px;
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
@@ -130,7 +173,7 @@ html {
 
 /* Style adjustments for the form labels */
 .controls label {
-    font-size: x-large;
+    font-size: 20px;
     /* Smaller font size for captions */
     color: #555;
     /* Dark grey color for text */
@@ -140,7 +183,7 @@ html {
 
 /* Ensure select elements are 100% width of their cell */
 .controls select {
-    font-size: medium;
+    font-size: 20px;
     width: 95%;
     padding: 8px;
     /* Adjust the padding as needed */
@@ -283,13 +326,13 @@ label {
 
 .popup {
     position: absolute;
-    max-width: 300px;
+    max-width: 40vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #fff;
-    padding: 20px;
+    padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     top: 50%;
@@ -319,6 +362,7 @@ label {
 
 /* Content styles within the popup */
 #infoPopupContent {
+    font-size: 18px;
     background: white;
     padding: 50px; /* Add padding to all sides */
     border-radius: 15px;
@@ -330,7 +374,7 @@ label {
 
 #infoPopupContent h2 {
     color: #333;
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 
 #infoPopupContent p {
@@ -378,7 +422,7 @@ h2#bookTitle {
 
 button {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 20px;
     background-color: #007bff;
     color: white;
     border: none;
