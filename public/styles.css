@@ -82,14 +82,33 @@ html {
 
 .controls {
     /* Styles for your controls section */
-    max-height: fit-content;
+    display: grid; /* Use grid layout for better control */
+    grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
+    gap: 10px; /* Space between grid items */
+    padding: 10px;
     border-color: #C9ADA7;
     border-radius: 15px;
     border-style: solid;
     border-width: 2px;
-    padding: 10px;
-    /* Fit the content's height */
+    box-sizing: border-box; /* Include padding and borders in the width calculation */
 }
+
+.controls label, .controls select, .controls input[type="range"] {
+    width: 100%; /* Full width for each item */
+}
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+    .controls {
+        grid-template-columns: 1fr; /* One column layout for smaller screens */
+    }
+}
+
+/* Adjust the slider's width on different screen sizes */
+.controls input[type="range"] {
+    width: calc(100% - 20px); /* Adjust width to account for padding */
+}
+
 
 #chart {
     /* Full width and height within its grid area */
