@@ -141,7 +141,7 @@ html {
 }
 
 #infoText {
-    font-size: 20px;
+    font-size: 26px;
     color: #22223B;
     display: flex;
     flex-direction: column; /* Aligns children vertically */

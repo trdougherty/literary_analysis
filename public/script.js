@@ -4,6 +4,8 @@ let svg; // Declare svg here to make it accessible in the global scope
 let width, height; // Declare width and height here for global access
 let timeoutId;
 
+let xScale, yScale; // Declare xScale and yScale here for global access
+
 let step = parseInt(localStorage.getItem('onboardingStep')) || 1;
 console.log("step:", step);
 
@@ -148,6 +150,67 @@ function drawChart() {
     // ...
 }
 
+function drawChapterLinesAndSetXAxis(chapterData) {
+    const chapterPositions = chapterData.x.map((chapterNumber, index) => {
+        const position = chapterData.y.slice(0, index + 1).reduce((a, b) => a + b, 0);
+        return { position: position, chapter: chapterNumber };
+    });
+
+    // Draw chapter lines
+    chapterPositions.forEach(chapter => {
+        svg.append('line')
+            .attr('x1', xScale(chapter.position))
+            .attr('x2', xScale(chapter.position))
+            .attr('y1', margin.top)
+            .attr('y2', height - margin.bottom)
+            .attr('stroke', 'pink')
+            .attr('stroke-width', 2)
+            .style('opacity', 0.5)
+            .lower();
+    });
+
+    // Calculate the maximum number of ticks based on chart width
+    const maxTicks = Math.floor(width / 75); // One tick per 50 pixels, adjust as needed
+    const tickInterval = Math.ceil(chapterPositions.length / maxTicks);
+    const tickValues = chapterPositions
+        .filter((_, i) => i % tickInterval === 0)
+        .map(chapter => chapter.position);
+
+    // Set x-axis with chapter ticks
+    const xAxis = d3.axisBottom(xScale)
+    .tickValues(tickValues)
+    .tickFormat((d, i) => `${chapterPositions.find(chap => chap.position === d).chapter + 1}`);
+    
+    // Select or create the x-axis group
+    let xAxisGroup = svg.select(".x-axis-group");
+    if (xAxisGroup.empty()) {
+        xAxisGroup = svg.append("g")
+            .attr("class", "x-axis-group")
+            .attr("transform", `translate(0, ${height - margin.bottom})`);
+    }
+    xAxisGroup.call(xAxis);
+
+    // Set font size for tick labels
+    xAxisGroup.selectAll("text")
+        .style("font-size", "20px");
+
+    // X-Axis Label
+    let xLabel = svg.select(".x-axis-label");
+    if (xLabel.empty()) {
+        svg.append("text")
+            .attr("class", "x-axis-label")
+            .attr("x", width / 2)
+            .attr("y", height - (margin.bottom / 2)) // Adjust for positioning
+            .style("text-anchor", "middle")
+            .style("font-size", "20px")
+            .text("Chapter");
+    } else {
+        xLabel.attr("x", width / 2)
+            .attr("y", height - (margin.bottom / 2))
+            .text("Chapter");
+    }
+}
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const backButton = document.getElementById('backButton');
@@ -225,6 +288,9 @@ function updateBookTitle(dataset) {
 document.getElementById('dataset').addEventListener('change', function () {
     var termValue = document.getElementById('term').value;
     var sliderValue = document.getElementById('mySlider').value;
+    svg.selectAll('line').remove();
+    svg.select(".x-axis-group").remove();
+
     updateBookTitle(this.value);
     loadDataset(this.value, termValue, sliderValue);
 });
@@ -267,18 +333,17 @@ function movingAverage(values, N) {
 }
 
 function loadDataset(datasetName, termValue, sliderValue) {
-    // Clear the SVG container
     // svg.selectAll("*").remove();
     d3.json(`./data/${datasetName}_${termValue}.json`).then(data => {
         const svgCanvas = svg.append("g")
             .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
         // Define scales
-        const xScale = d3.scaleLinear()
+        xScale = d3.scaleLinear()
             .domain([0, d3.max(data.x)])
             .range([margin.left, width - margin.right]);
 
-        const yScale = d3.scaleLinear()
+        yScale = d3.scaleLinear()
             .domain([d3.min(data.y), d3.max(data.y)]).nice()
             .range([height - margin.bottom, margin.top]);
 
@@ -289,7 +354,7 @@ function loadDataset(datasetName, termValue, sliderValue) {
         const smoothedLine = d3.line()
             .x(d => xScale(d[0]))
             .y(d => yScale(d[1]))
-            .curve(d3.curveNatural);
+            .curve(d3.curveLinear);
 
         const path = svg.selectAll('path.moving-average').data([points]);
         path.enter().append('path')
@@ -355,41 +420,13 @@ function loadDataset(datasetName, termValue, sliderValue) {
 
         });
 
-
-        // Define the x-axis label text
-        const xAxisLabel = "Book Section"; // Replace with your actual label
-
-        // Define and draw the x-axis
-        const xAxis = d3.axisBottom(xScale)
-            .ticks(5)
-            .tickFormat(d3.format("d"));
-
-        // Check if x-axis group exists, otherwise create
-        let xAxisGroup = svg.select(".x-axis-group");
-        if (xAxisGroup.empty()) {
-            xAxisGroup = svg.append("g")
-                .attr("class", "x-axis-group")
-                .attr("transform", `translate(0, ${height - margin.bottom})`);
+        // Load chapter length data only once
+        if (!svg.selectAll('line').empty()) {
+            // Skip if chapter lines are already drawn
+            return;
         }
-        xAxisGroup.call(xAxis);
-        xAxisGroup.selectAll("text")
-            .style("font-size", "20px"); // Adjust this value to your desired font size
 
-        // Check if x-axis label exists, otherwise append it
-        let xLabel = svg.select(".x-axis-label");
-        if (xLabel.empty()) {
-            svg.append("text")
-                .attr("class", "x-axis-label")
-                .attr("x", width / 2) // Center the label within the entire SVG width
-                .attr("y", height - (margin.bottom / 2)) // Position it above the bottom margin
-                .style("text-anchor", "middle") // Center the text
-                .style("font-size", "20px") // Adjust the font size as needed
-                .text(xAxisLabel);
-        } else {
-            // If the label already exists, update its position
-            xLabel.attr("x", width / 2)
-                .attr("y", height - (margin.bottom / 2));
-        }
+        d3.json(`./data/${datasetName}_chapterlength.json`).then(drawChapterLinesAndSetXAxis);
 
         // Update the y-axis
         const yAxis = d3.axisLeft(yScale)
@@ -412,8 +449,8 @@ function loadDataset(datasetName, termValue, sliderValue) {
 }
 
 // Initial load
-loadDataset("PG100001", "hope", 50);
-updateBookTitle("PG100001");
+loadDataset("PG0100021", "hope", 50);
+updateBookTitle("PG0100021");
 
 
 // function typeText(element, text) {
