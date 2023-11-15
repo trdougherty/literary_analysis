@@ -163,7 +163,7 @@ function drawChapterLinesAndSetXAxis(chapterData) {
             .attr('x2', xScale(chapter.position))
             .attr('y1', margin.top)
             .attr('y2', height - margin.bottom)
-            .attr('stroke', 'pink')
+            .attr('stroke', '#fbc4ab')
             .attr('stroke-width', 2)
             .style('opacity', 0.5)
             .lower();
