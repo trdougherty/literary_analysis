@@ -155,9 +155,12 @@ function drawChapterLinesAndSetXAxis(chapterData) {
         const position = chapterData.y.slice(0, index + 1).reduce((a, b) => a + b, 0);
         return { position: position, chapter: chapterNumber };
     });
-
-    // Draw chapter lines
-    chapterPositions.forEach(chapter => {
+    
+    // Exclude the last chapter position
+    const positionsToDraw = chapterPositions.slice(0, -1);
+    
+    // Draw chapter lines for all but the last chapter position
+    positionsToDraw.forEach(chapter => {
         svg.append('line')
             .attr('x1', xScale(chapter.position))
             .attr('x2', xScale(chapter.position))
@@ -179,7 +182,7 @@ function drawChapterLinesAndSetXAxis(chapterData) {
     // Set x-axis with chapter ticks
     const xAxis = d3.axisBottom(xScale)
     .tickValues(tickValues)
-    .tickFormat((d, i) => `${chapterPositions.find(chap => chap.position === d).chapter + 1}`);
+    .tickFormat((d, i) => `${chapterPositions.find(chap => chap.position === d).chapter + 2}`);
     
     // Select or create the x-axis group
     let xAxisGroup = svg.select(".x-axis-group");
