@@ -27,10 +27,31 @@ function positionPopup(position) {
     popup.style.left = position.left;
 }
 
+function updateChartSize() {
+    const containerDiv = document.querySelector('.container');
+    width = containerDiv.clientWidth;
+    height = containerDiv.clientHeight - margin.top - margin.bottom;
+
+    // Redraw the chart
+    const datasetValue = document.getElementById('dataset').value;
+    const termValue = document.getElementById('term').value;
+    const sliderValue = document.getElementById('mySlider').value;
+
+    // Clear any existing lines and x-axis before redrawing
+    svg.selectAll('line').remove();
+    svg.select(".x-axis-group").remove();
+
+    // Redraw the chart components including lines and x-axis
+    loadDataset(datasetValue, termValue, sliderValue);
+}
+
+// Event listener for window resize
+window.addEventListener('resize', updateChartSize);
+
 // Define the content for each step
 const steps = [
     { 
-        title: 'Peaks and Valleys of Literary Emotion', 
+        title: 'Storyline Structure', 
         content: 'This small project is meant to help highlight the ebbs and flows of emotions through great books. I hope you enjoy it! First, how to use the system...', 
         selector: '.nextButton', // Selects the div with class 'controls'
         position: { top: '50vh', left: '40vw' } // Example of using viewport units
@@ -63,7 +84,7 @@ const steps = [
         title: 'Moving Average Plot', 
         content: 'With less smoothing, extreme values are more visible. Peaks and valleys are more pronounced, indicating that the concept is more prominent in those sections. Greater smoothing shows long term trends, and is useful for seeing how the concept changes over the course of the book.', 
         selector: '.moving-average', // Selects the element with id 'mySlider'
-        position: { top: '30vh', left: '50vw' } // Example of using viewport units
+        position: { top: '60vh', left: '50vw' } // Example of using viewport units
     },
     { 
         title: 'Interacting with the Graph', 
@@ -214,6 +235,13 @@ function drawChapterLinesAndSetXAxis(chapterData) {
     }
 }
 
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode === 37) { // Left arrow key code
+        document.getElementById('backButton').click();
+    } else if (event.keyCode === 39) { // Right arrow key code
+        document.getElementById('nextButton').click();
+    }
+});
 
 document.addEventListener('DOMContentLoaded', function () {
     const backButton = document.getElementById('backButton');
@@ -433,7 +461,7 @@ function loadDataset(datasetName, termValue, sliderValue) {
 
         // Update the y-axis
         const yAxis = d3.axisLeft(yScale)
-            .ticks(5)
+            .ticks(10)
             .tickFormat(d3.format(".0%")); // This will format the ticks as percentages
 
         // Check if y-axis exists, otherwise create
@@ -452,7 +480,7 @@ function loadDataset(datasetName, termValue, sliderValue) {
 }
 
 // Initial load
-loadDataset("PG0100021", "hope", 50);
+loadDataset("PG0100021", "oppression", 50);
 updateBookTitle("PG0100021");
 
 
