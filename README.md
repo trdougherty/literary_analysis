@@ -25,7 +25,7 @@ The project leverages the power of large language models, particularly Facebook'
 
 2. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   conda create --name lit --file requirements.txt
    ```
 
 ## Usage
