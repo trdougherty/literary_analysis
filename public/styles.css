@@ -1,13 +1,17 @@
 /* Hide mobile content on larger screens by default */
 .mobile-content {
     display: none;
-    text-align: center; /* Center text horizontally */
-    padding: 20px; /* Add padding around the content */
-    box-sizing: border-box; /* Include padding in the width calculation */
+    text-align: center;
+    /* Center text horizontally */
+    padding: 20px;
+    /* Add padding around the content */
+    box-sizing: border-box;
+    /* Include padding in the width calculation */
 }
 
 /* CSS Media Query for Mobile Devices */
 @media screen and (max-width: 768px) {
+
     /* Hide full site content on mobile */
     .full-site-content {
         display: none;
@@ -20,15 +24,20 @@
 
     /* Additional styling for mobile content */
     .mobile-content img {
-        width: 100%; /* Make images responsive */
-        max-width: 400px; /* Limit maximum image width */
-        margin: 10px auto; /* Center images and add space between them */
-        display: block; /* Ensure images are block elements to center properly */
+        width: 100%;
+        /* Make images responsive */
+        max-width: 400px;
+        /* Limit maximum image width */
+        margin: 10px auto;
+        /* Center images and add space between them */
+        display: block;
+        /* Ensure images are block elements to center properly */
     }
 
     .mobile-content p {
         margin-bottom: 20px;
-        font-size: 20px; /* Adjust text size for readability */
+        font-size: 20px;
+        /* Adjust text size for readability */
     }
 }
 
@@ -49,6 +58,17 @@ html {
     background-color: #f4f4f4;
     font-size: 20px;
     font-family: 'Libre Baskerville', serif;
+}
+
+.additional-info {
+    color: gray;
+    /* Light gray font color */
+    font-size: 16px;
+    /* Smaller font size */
+    margin-top: 20px;
+    /* Space above the additional info */
+    text-align: center;
+    /* Center the text */
 }
 
 /* Other styles remain unchanged */
@@ -81,33 +101,98 @@ html {
 }
 
 .controls {
-    /* Styles for your controls section */
-    display: grid; /* Use grid layout for better control */
-    grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
-    gap: 10px; /* Space between grid items */
+    /* Combine grid layout properties */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Two columns of equal width */
+    gap: 10px;
+    /* Space between grid items */
+    align-items: center;
+    /* Align items vertically in the center */
+
+    /* Styling for border and padding */
     padding: 10px;
     border-color: #C9ADA7;
     border-radius: 15px;
     border-style: solid;
     border-width: 2px;
-    box-sizing: border-box; /* Include padding and borders in the width calculation */
-}
+    box-sizing: border-box;
+    /* Include padding and borders in the width calculation */
 
-.controls label, .controls select, .controls input[type="range"] {
-    width: 100%; /* Full width for each item */
+    /* Style adjustments for form elements */
+    label,
+    select,
+    input[type="range"] {
+        width: 100%;
+        /* Full width for each item */
+        font-size: 20px;
+        /* Font size for all controls */
+    }
+
+    /* Custom styling for select elements */
+    select {
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: #ffffff68;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        /* Custom arrow styling */
+        background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+            linear-gradient(135deg, gray 50%, transparent 50%),
+            linear-gradient(to right, #ddd, #ddd);
+        background-position: calc(100% - 20px) calc(1em + 2px),
+            calc(100% - 15px) calc(1em + 2px),
+            calc(100% - 2.5em) 0.5em;
+        background-size: 5px 5px, 5px 5px, 1px 1.5em;
+        background-repeat: no-repeat;
+    }
+
+    /* Slider styles */
+    input[type="range"] {
+        grid-column: 1 / -1;
+        /* Span across all columns */
+        padding: 5px 0;
+        /* Reduced padding for visual comfort */
+        background: #e4e4e4;
+        /* Light grey background */
+        cursor: pointer;
+        /* Cursor on hover */
+        border-radius: 5px;
+        /* Rounded corners for the slider */
+        height: 5px;
+        /* Specified height of the track */
+        width: calc(100% - 20px);
+        /* Adjust width to account for padding */
+    }
+
+    /* Focus and hover styles for select elements */
+    select:focus {
+        outline: none;
+        border-color: #a0a0a0;
+        box-shadow: 0 0 3px 2px rgba(0, 100, 250, 0.2);
+    }
+
+    select:hover {
+        border-color: #888;
+    }
+
+    /* Label styles */
+    label {
+        margin-bottom: 3px;
+        font-weight: bold;
+    }
 }
 
 /* Responsive adjustments for smaller screens */
 @media screen and (max-width: 768px) {
     .controls {
-        grid-template-columns: 1fr; /* One column layout for smaller screens */
+        grid-template-columns: 1fr;
+        /* One column layout for smaller screens */
     }
 }
 
-/* Adjust the slider's width on different screen sizes */
-.controls input[type="range"] {
-    width: calc(100% - 20px); /* Adjust width to account for padding */
-}
 
 
 #chart {
@@ -163,53 +248,51 @@ html {
     font-size: 24px;
     color: #22223B;
     display: flex;
-    flex-direction: column; /* Aligns children vertically */
+    flex-direction: column;
+    /* Aligns children vertically */
     background-color: #F2E9E4;
-    padding: 2px; /* Adjust padding as needed */
+    padding: 2px;
+    /* Adjust padding as needed */
     box-sizing: border-box;
     overflow: auto;
     height: 100%;
-    border-radius: 15px; /* Adds rounded edges, adjust as needed */
+    border-radius: 15px;
+    /* Adds rounded edges, adjust as needed */
 }
 
 #infoText .header-row {
     padding-top: 0px;
-    text-align: center; /* Aligns header text to the left */
+    text-align: center;
+    /* Aligns header text to the left */
 }
 
 #infoText .hr-row hr {
     border: none;
     height: 1px;
-    background-color: gray; /* Solid color for visibility */
-    width: 80%; /* Full width of the container */
-    margin-top: 0px; /* Adjust as needed */
-    margin-bottom: 0px; /* Adjust as needed */
+    background-color: gray;
+    /* Solid color for visibility */
+    width: 80%;
+    /* Full width of the container */
+    margin-top: 0px;
+    /* Adjust as needed */
+    margin-bottom: 0px;
+    /* Adjust as needed */
 }
 
 #infoText .summary-text-row {
     font-size: 20px;
     padding: 7vh;
-    flex-grow: 2; /* Allows this row to take up remaining space */
+    flex-grow: 2;
+    /* Allows this row to take up remaining space */
     display: flex;
-    align-items: top; /* Vertically centers the content */
-    text-align: left; /* Aligns summary text to the left */
+    align-items: top;
+    /* Vertically centers the content */
+    text-align: left;
+    /* Aligns summary text to the left */
 }
 
 /* Adjust the dropdowns and slider to the full width of the left side */
 
-
-/* Extend grid-template-columns for a full-length slider */
-.controls {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    /* Two columns for the dropdowns */
-    grid-template-rows: 1fr 1.5fr 1fr;
-    /* Three rows: labels, dropdowns, and slider */
-    gap: 5px;
-    /* Reduced space between the grid items */
-    align-items: center;
-    /* Align items vertically in the center */
-}
 
 /* Style adjustments for the form labels */
 .controls label {
@@ -309,57 +392,75 @@ label {
 /* Overlay styles */
 /* Styles for the tutorial overlay */
 .overlay {
-    display: none; /* Initially hidden */
+    display: none;
+    /* Initially hidden */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Slight semi-transparent background */
+    background: rgba(0, 0, 0, 0.3);
+    /* Slight semi-transparent background */
     z-index: 1000;
-    justify-content: space-between; /* Align buttons to the bottom */
-    align-items: center; /* Center vertically */
+    justify-content: space-between;
+    /* Align buttons to the bottom */
+    align-items: center;
+    /* Center vertically */
     text-align: center;
-    backdrop-filter: blur(5px); /* Add a slight blur effect to the background */
+    backdrop-filter: blur(5px);
+    /* Add a slight blur effect to the background */
 }
 
 .overlay-button {
-    font-size: 36px; /* Increase if you want bigger text */
+    font-size: 36px;
+    /* Increase if you want bigger text */
     background-color: white;
     color: black;
-    border: 5px solid transparent; /* Default transparent border */
+    border: 5px solid transparent;
+    /* Default transparent border */
     /* border: 5px solid white; Adjust thickness as needed */
-    padding: 40px 40px; /* Adjust for bigger size */
-    border-radius: 50%; /* This makes it a circle */
-    width: 60px; /* Adjust for size */
-    height: 60px; /* Adjust for size */
+    padding: 40px 40px;
+    /* Adjust for bigger size */
+    border-radius: 50%;
+    /* This makes it a circle */
+    width: 60px;
+    /* Adjust for size */
+    height: 60px;
+    /* Adjust for size */
     cursor: pointer;
     transition: background-color 0.3s ease;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1010; /* Same or above as popup */
+    z-index: 1010;
+    /* Same or above as popup */
 }
 
 #highlightOverlay {
     position: absolute;
-    border: 5px solid #f4a261; /* Adjust the border size and color as needed */
+    border: 5px solid #f4a261;
+    /* Adjust the border size and color as needed */
     border-radius: 10px;
     box-sizing: border-box;
-    display: none; /* Initially hidden */
-    pointer-events: none; /* Allows click events to pass through */
+    display: none;
+    /* Initially hidden */
+    pointer-events: none;
+    /* Allows click events to pass through */
 }
 
 
 .overlay-container {
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
-    z-index: 1000; /* Make sure it's above all other content */
+    background: rgba(0, 0, 0, 0.7);
+    /* Dark semi-transparent background */
+    z-index: 1000;
+    /* Make sure it's above all other content */
     justify-content: center;
     align-items: center;
 }
@@ -378,8 +479,58 @@ label {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1020; /* Ensure it's above other content */
+    z-index: 1020;
+    /* Ensure it's above other content */
 }
+
+.popup h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    /* Space below the title */
+}
+
+.popup p {
+    font-size: 18px;
+    /* Slightly larger font size for readability */
+    margin-bottom: 10px;
+    /* Space between paragraphs */
+}
+
+/* Add margin to the last paragraph */
+.popup p:last-of-type {
+    margin-bottom: 20px;
+    /* Adds 20px space below the last paragraph */
+}
+
+/* Alternatively, add margin to the top of the footer */
+.footer {
+    margin-top: 20px;
+    /* Adds 20px space above the footer */
+    text-align: center;
+    padding: 0px;
+    /* background-color: #f4f4f4; */
+    border-top: 1px solid #e0e0e0;
+}
+
+.footer-text,
+.footer-license {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+
+.additional-info {
+    color: lightgray;
+    font-size: 14px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+/* Additional styling for the intro slide */
+/* You can add background colors, padding, borders, etc., as needed */
+
 
 
 #infoPopup {
@@ -404,7 +555,8 @@ label {
 #infoPopupContent {
     font-size: 18px;
     background: white;
-    padding: 50px; /* Add padding to all sides */
+    padding: 50px;
+    /* Add padding to all sides */
     border-radius: 15px;
     display: inline-block;
     margin: auto;
@@ -442,15 +594,21 @@ label {
 
 /* Add this CSS to your stylesheet */
 h2#bookTitle {
-    margin: 0; /* Remove default top and bottom margins */
-    padding-top: 0; /* Remove default top padding */
+    margin: 0;
+    /* Remove default top and bottom margins */
+    padding-top: 0;
+    /* Remove default top padding */
     padding-bottom: 10px;
-    vertical-align: top; /* Align text to the top */
+    vertical-align: top;
+    /* Align text to the top */
 }
 
 /* Spacing for individual elements inside the infoBox */
-#infoBox div, #infoBox h1, #infoBox p {
-    margin-bottom: 0.3vh; /* Uniform spacing */
+#infoBox div,
+#infoBox h1,
+#infoBox p {
+    margin-bottom: 0.3vh;
+    /* Uniform spacing */
 }
 
 /* Styles for the content */
@@ -484,8 +642,10 @@ button {
     display: flex;
     justify-content: space-between;
     padding: 0 20px;
-    z-index: 1010; /* Same z-index as popup */
-    padding: 50px; /* Adds padding around the entire container */
+    z-index: 1010;
+    /* Same z-index as popup */
+    padding: 50px;
+    /* Adds padding around the entire container */
 }
 
 
@@ -503,17 +663,23 @@ button:hover {
 
 .social-links {
     display: flex;
-    gap: 15px; /* Adjust the space between icons as needed */
-    justify-content: center; /* Centers the links horizontally */
-    align-items: center; /* Aligns icons and text vertically */
-    margin-top: 10px; /* Optional: Adds space above the social links */
+    gap: 15px;
+    /* Adjust the space between icons as needed */
+    justify-content: center;
+    /* Centers the links horizontally */
+    align-items: center;
+    /* Aligns icons and text vertically */
+    margin-top: 10px;
+    /* Optional: Adds space above the social links */
 }
 
 .social-links a {
     display: flex;
-    align-items: center; /* Aligns icon and text inside the link */
+    align-items: center;
+    /* Aligns icon and text inside the link */
 }
 
 .social-links img {
-    margin-right: 8px; /* Space between icon and text */
+    margin-right: 8px;
+    /* Space between icon and text */
 }

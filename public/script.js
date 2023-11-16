@@ -50,94 +50,134 @@ window.addEventListener('resize', updateChartSize);
 
 // Define the content for each step
 const steps = [
-    { 
-        title: 'Storyline Structure', 
-        content: 'This small project is meant to help highlight the ebbs and flows of emotions through great books. I hope you enjoy it! First, how to use the system...', 
+    {
+        title: 'Storyline Structure',
+        content: 'This small project is meant to help highlight the ebbs and flows of emotions through great books. I hope you enjoy it! First, how to use the system...',
         selector: '.nextButton', // Selects the div with class 'controls'
         position: { top: '50vh', left: '40vw' } // Example of using viewport units
     },
-    { 
-        title: 'Control Panel', 
-        content: 'This section is the main way you can interact with this system.', 
+    {
+        title: 'Control Panel',
+        content: 'This section is the main way you can interact with this system.',
         selector: '.controls', // Selects the div with class 'controls'
         position: { top: '50vh', left: '70vw' } // Example of using viewport units
     },
-    { 
-        title: 'Book Selection', 
-        content: 'The dropdown menu here has some precomputed books available for analysis.', 
+    {
+        title: 'Book Selection',
+        content: 'The dropdown menu here has some precomputed books available for analysis.',
         selector: '#dataset', // Selects the element with id 'dataset'
         position: { top: '30vh', left: '70vw' } // Example of using viewport units
     },
-    { 
-        title: 'Concept Selection', 
-        content: 'By selecting a concept, the graph will update to show you the progression of the concept through the book.', 
+    {
+        title: 'Concept Selection',
+        content: 'By selecting a concept, the graph will update to show you the progression of the concept through the book.',
         selector: '#term', // Selects the element with id 'term'
         position: { top: '50vh', left: '70vw' } // Example of using viewport units
     },
-    { 
-        title: 'Moving Average', 
-        content: 'The dark line on the graph represents a moving average of emotion in the surrounding sections. By increasing or decreasing this slider, you can zoom in on local trends or smooth out macroscopic patterns.', 
+    {
+        title: 'Moving Average',
+        content: 'The dark line on the graph represents a moving average of emotion in the surrounding sections. By increasing or decreasing this slider, you can zoom in on local trends or smooth out macroscopic patterns.',
         selector: '#mySlider', // Selects the element with id 'mySlider'
         position: { top: '50vh', left: '70vw' } // Example of using viewport units
     },
-    { 
-        title: 'Moving Average Plot', 
-        content: 'With less smoothing, extreme values are more visible. Peaks and valleys are more pronounced, indicating that the concept is more prominent in those sections. Greater smoothing shows long term trends, and is useful for seeing how the concept changes over the course of the book.', 
+    {
+        title: 'Moving Average Plot',
+        content: 'With less smoothing, extreme values are more visible. Peaks and valleys are more pronounced, indicating that the concept is more prominent in those sections. Greater smoothing shows long term trends, and is useful for seeing how the concept changes over the course of the book.',
         selector: '.moving-average', // Selects the element with id 'mySlider'
         position: { top: '60vh', left: '50vw' } // Example of using viewport units
     },
-    { 
-        title: 'Interacting with the Graph', 
-        content: 'The graph is filled with little dots, each of which represent how the section scored for the emotion. The sections with larger circles around them have an automatic summary associated with them, which can be seen by hovering over the circle.', 
+    {
+        title: 'Interacting with the Graph',
+        content: 'The graph is filled with little dots, each of which represent how the section scored for the emotion. The sections with larger circles around them have an automatic summary associated with them, which can be seen by hovering over the circle.',
         selector: '#chart', // Selects the element with id 'mySlider'
         position: { top: '50vh', left: '70vw' } // Example of using viewport units
     },
-    { 
-        title: 'Section Summaries', 
-        content: 'When hovering over a dot, this section will populate with a brief summary of the contents in this section.', 
+    {
+        title: 'Section Summaries',
+        content: 'When hovering over a dot, this section will populate with a brief summary of the contents in this section.',
         selector: '#infoText', // Selects the element with id 'mySlider'
-        position: { top: '50vh', left: '60vw' } // Example of using viewport units
+        position: { top: '70vh', left: '65vw' } // Example of using viewport units
     },
-    { 
-        title: 'Book Information', 
-        content: 'For the book selected, some information about the book is presented in this section, including a famous quote from the book.', 
+    {
+        title: 'Book Information',
+        content: 'For the book selected, some information about the book is presented in this section, including a famous quote from the book.',
         selector: '#infoBox', // Selects the element with id 'mySlider'
         position: { top: '35vh', left: '65vw' } // Example of using viewport units
     },
-    { 
-        title: 'Additional Information', 
-        content: 'For links to the project Github, information about me, and motivation for the project, click this icon.', 
+    {
+        title: 'Additional Information',
+        content: 'For links to the project Github, information about me, and motivation for the project, click this icon.',
         selector: '.info-icon-container', // Selects the element with id 'mySlider'
         position: { top: '30vh', left: '75vw' } // Example of using viewport units
     }
 ];
 
+function renderIntroSlide() {
+    const overlay = document.querySelector('.overlay-container');
+    const highlightOverlay = document.getElementById('highlightOverlay');
+    const popup = document.querySelector('.popup');
+
+    // Clear highlight overlay
+    highlightOverlay.style.display = 'none';
+
+    popup.innerHTML = `
+        <h1>Storyline Structure</h1>
+        <p>Welcome to an exploration of literature through the lens of data visualization! Tools like ChatGPT have been wonderful as utilities for collecting and learning new information, can we push them to help us better understand books?</p>
+        <p>This project uses the technology of large language models to read and interpret books, identifying the ebbs and flows of concepts as the book progresses.</p>
+        <div class="footer">
+            <div class="footer-text">
+                <p>Created by: <a href="https://www.linkedin.com/in/thomasryundougherty/" target="_blank">Thomas Ryun Dougherty</a></p>
+            </div>
+            <div class="footer-license">
+                <p>&copy; MIT License</p>
+            </div>
+        </div>
+    `;
+
+
+    // Position and display the overlay for the intro slide
+    overlay.style.display = 'block';
+    positionPopup({ top: '50vh', left: '50vw' }); // Adjust as needed
+}
+
 function updateContent() {
-    console.log("run upodate")
     const overlay = document.querySelector('.overlay-container');
     const popup = document.querySelector('.popup');
-    const popupTitle = popup.querySelector('h1');
-    const popupContent = popup.querySelector('p');
+    const popupTitle = document.createElement('h1');
+    const popupContent = document.createElement('p');
 
-    if (step >= 1 && step <= steps.length) {
-        const currentStep = steps[step - 1];
-        popupTitle.textContent = currentStep.title;
-        popupContent.textContent = currentStep.content;
+    // Clear existing content in the popup
+    popup.innerHTML = '';
 
-        if (currentStep.selector) {
-            const elementToHighlight = document.querySelector(currentStep.selector);
-            if (elementToHighlight) {
-                highlightElement(elementToHighlight);
-            }
-        }
-
-        positionPopup(currentStep.position);
-
-        overlay.style.display = 'block';
+    if (step === 1) {
+        // Render special intro slide
+        renderIntroSlide();
     } else {
-        overlay.style.display = 'none';
+        // Standard content for other steps
+        if (step >= 1 && step <= steps.length) {
+            const currentStep = steps[step - 1];
+
+            popupTitle.textContent = currentStep.title;
+            popupContent.textContent = currentStep.content;
+
+            popup.appendChild(popupTitle);
+            popup.appendChild(popupContent);
+
+            if (currentStep.selector) {
+                const elementToHighlight = document.querySelector(currentStep.selector);
+                if (elementToHighlight) {
+                    highlightElement(elementToHighlight);
+                }
+            }
+
+            positionPopup(currentStep.position);
+            overlay.style.display = 'block';
+        } else {
+            overlay.style.display = 'none';
+        }
     }
 }
+
 // Function to update the step and handle local storage
 function updateStep(newStep) {
     step = newStep;
@@ -176,10 +216,10 @@ function drawChapterLinesAndSetXAxis(chapterData) {
         const position = chapterData.y.slice(0, index + 1).reduce((a, b) => a + b, 0);
         return { position: position, chapter: chapterNumber };
     });
-    
+
     // Exclude the last chapter position
     const positionsToDraw = chapterPositions.slice(0, -1);
-    
+
     // Draw chapter lines for all but the last chapter position
     positionsToDraw.forEach(chapter => {
         svg.append('line')
@@ -193,18 +233,21 @@ function drawChapterLinesAndSetXAxis(chapterData) {
             .lower();
     });
 
-    // Calculate the maximum number of ticks based on chart width
-    const maxTicks = Math.floor(width / 75); // One tick per 50 pixels, adjust as needed
-    const tickInterval = Math.ceil(chapterPositions.length / maxTicks);
-    const tickValues = chapterPositions
-        .filter((_, i) => i % tickInterval === 0)
-        .map(chapter => chapter.position);
+    // Calculate the tick values for the x-axis
+    let tickValues = [];
+    let previousPosition = 0;
+    chapterPositions.forEach((chapter, index) => {
+        if (index === 0 || (xScale(chapter.position) - xScale(previousPosition)) > 30) { // Minimum 50px between ticks
+            tickValues.push(chapter.position);
+            previousPosition = chapter.position;
+        }
+    });
 
     // Set x-axis with chapter ticks
     const xAxis = d3.axisBottom(xScale)
-    .tickValues(tickValues)
-    .tickFormat((d, i) => `${chapterPositions.find(chap => chap.position === d).chapter + 2}`);
-    
+        .tickValues(tickValues)
+        .tickFormat((d) => `${chapterPositions.find(chap => chap.position === d).chapter + 2}`);
+
     // Select or create the x-axis group
     let xAxisGroup = svg.select(".x-axis-group");
     if (xAxisGroup.empty()) {
@@ -217,7 +260,6 @@ function drawChapterLinesAndSetXAxis(chapterData) {
     // Set font size for tick labels
     xAxisGroup.selectAll("text")
         .style("font-size", "20px");
-
     // X-Axis Label
     let xLabel = svg.select(".x-axis-label");
     if (xLabel.empty()) {
@@ -235,7 +277,8 @@ function drawChapterLinesAndSetXAxis(chapterData) {
     }
 }
 
-document.addEventListener('keydown', function(event) {
+
+document.addEventListener('keydown', function (event) {
     if (event.keyCode === 37) { // Left arrow key code
         document.getElementById('backButton').click();
     } else if (event.keyCode === 39) { // Right arrow key code
