@@ -1,25 +1,76 @@
-# dbr
-Creation and Data pipeline for developing dbrs
 
-### Data Preprocessing
-All of the data processing is done in a single Julia notebook (Pluto) called data_prep.jl. Reference that for all of the data prep.
-It should have all of the annotations needed to go step by step through the data cleaning and preparation.
+# Storyline Structure Analysis
 
-### Order of running files
-1. Footprint_matching.jl
-2. data_prep.jl
+## Project Overview
+Storyline Structure Analysis is a project that visualizes the progression of complex concepts through the course of a book. Utilizing advanced Natural Language Processing techniques, it identifies and plots the ebbs and flows of themes like fear, hope, and oppression in literary works.
 
-The footprint matching file will first generate the matching footprints from the new york footprints dataset with existing data points from microsoft's building footprints.
+## Technical Overview
+The project leverages the power of large language models, particularly Facebook's BART and DeBERTa, to read and interpret books. Key functionalities include sentiment analysis, summarization, and chapter-based text processing.
 
-### Data Cleaning Pipeline
-1. Initial Weather Data is loaded from NOAA
-2. Weather Data is cleaned and anomalies are detected and dropped
-3. Building Data is loaded - in our case this comes from the list of buildings in New York City
-4. A region of interest is defined as a bounding box which surrounds our buildings
-5. This bounding box is then "broken" into weather zones using a voronoi paritioning scheme with the good weather stations
-6. Each building is then assigned to one of the weather zones, based on the containing region
-7. Satellite photos - a high resolution image is comissioned based on the bounding box region
-8. Each "sub" image is then captured by simply indexing the high resolution image with a box around each building location
+## Installation
 
-## Validation of accuracy
-The error terms were created using the guidance of [this ASHRAE handbook](http://www.eeperformance.org/uploads/8/6/5/0/8650231/ashrae_guideline_14-2002_measurement_of_energy_and_demand_saving.pdf)
+### Requirements
+- Python 3.x
+- PyTorch
+- Transformers library
+- NumPy
+- Pandas
+
+### Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/storyline-structure-analysis.git
+   cd storyline-structure-analysis
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Usage
+
+### Command-Line Interface
+To run the analysis, use the following command with appropriate arguments:
+
+```bash
+python parser.py --model_name meta-llama/Llama-2-7b-hf --input_dir gutenberg/data/tokens --output_dir your_output_directory --book_ids PG1001 PG1002
+```
+
+### Key Components
+
+- **Zero-Shot Classification**: Utilizes `MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli` model for classifying paragraphs against a set of predefined motifs.
+
+- **Summarization**: Employs `facebook/bart-large-cnn` for generating concise summaries of selected paragraphs.
+
+- **Custom Scripts**: Includes scripts for processing books, tokenizing text, and organizing data for visualization.
+
+## Data Processing
+The project reads books by paragraph, classifies them according to specified motifs, and generates summaries for a subset of paragraphs. Summarization and classification results are stored in JSON format for visualization.
+
+### Example JSON Structure
+```json
+{
+  "x": [0, 1, 2, ...],
+  "y": [0.1, 0.5, 0.2, ...]
+}
+```
+
+## Visualization
+Data visualization is implemented using D3.js, which plots the progression of concepts throughout a book. This is accompanied by an interactive web interface.
+
+## Contributing
+Contributions to the project are welcome. Please read the contributing guidelines before submitting your pull requests.
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+- Facebook AI Research for BART model
+- Moritz Laurer for DeBERTa-v3-base-mnli-fever-anli model
+- Project Gutenberg for providing a vast collection of books
+
+---
+
+Created by: [Thomas Ryun Dougherty](https://www.linkedin.com/in/thomasryundougherty/)
+© MIT License
