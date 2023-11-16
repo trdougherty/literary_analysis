@@ -34,7 +34,13 @@ The project leverages the power of large language models, particularly Facebook'
 To run the analysis, use the following command with appropriate arguments:
 
 ```bash
-python parser.py --model_name meta-llama/Llama-2-7b-hf --input_dir gutenberg/data/tokens --output_dir your_output_directory --book_ids PG1001 PG1002
+python ml/generate_vectors.py --input_dir gutenberg/data/tokens/ --output_dir public/data/ PG1399
+```
+
+To build the server locally, you can use
+
+```bash
+node server.js
 ```
 
 ### Key Components
@@ -66,9 +72,9 @@ Contributions to the project are welcome. Please read the contributing guideline
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgments
-- Facebook AI Research for BART model
-- Moritz Laurer for DeBERTa-v3-base-mnli-fever-anli model
-- Project Gutenberg for providing a vast collection of books
+- [Facebook AI Research](https://ai.facebook.com/) for the BART model
+- [Moritz Laurer](https://huggingface.co/MoritzLaurer) for the DeBERTa-v3-base-mnli-fever-anli model
+- [Project Gutenberg](https://www.gutenberg.org/) for providing a vast collection of books
 
 ---
 
