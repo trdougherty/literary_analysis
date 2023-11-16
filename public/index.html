@@ -1,35 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Storyline Structure</title>
     <link rel="icon" type="image/x-icon" href="./favicon.png">
-    <meta name="description" content="This project visualizes the progression of complex concepts through the course of a book.">
+    <meta name="description"
+        content="This project visualizes the progression of complex concepts through the course of a book.">
     <meta property="og:title" content="Storyline Structure">
-    <meta property="og:description" content="This project visualizes the progression of complex concepts through the course of a book.">
-    <meta property="og:url" content="https://literary-study-ef4e1b99097c.herokuapp.com/">
-    <meta property="og:image" content="https://github.com/trdougherty/literary_analysis/blob/main/public/oppression.png">
+    <meta property="og:description"
+        content="This project visualizes the progression of complex concepts through the course of a book.">
+    <meta property="og:url" content="https://www.storylinestructure.com">
+    <meta property="og:image"
+        content="https://github.com/trdougherty/literary_analysis/blob/main/public/oppression.png">
+    <!-- Replace with the absolute URL of your image -->
+    <meta property="og:image:width" content="1200"> <!-- Width of your image -->
+    <meta property="og:image:height" content="627"> <!-- Height of your image -->
+    <meta name="twitter:card" content="summary_large_image"> <!-- This is recommended for Twitter -->
     <meta name="twitter:title" content="Storyline Structure">
     <meta name="twitter:description" content="Visual interpretation of concept progressions in books.">
-    <meta name="twitter:image" content="https://github.com/trdougherty/literary_analysis/blob/main/public/oppression.png">
-    <meta name="twitter:card" content="This project visualizes the progression of complex concepts through the course of a book.">
+    <meta name="twitter:image"
+        content="https://github.com/trdougherty/literary_analysis/blob/main/public/oppression.png">
+    <meta name="twitter:card"
+        content="This project visualizes the progression of complex concepts through the course of a book.">
 
     <link rel="stylesheet" href="./styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Prata&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Prata&family=Sawarabi+Mincho&display=swap"
+        rel="stylesheet">
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5EVS3NP3PX"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-5EVS3NP3PX');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-5EVS3NP3PX');
     </script>
 </head>
+
 <body>
     <div class="full-site-content">
         <div class="overlay-container">
@@ -37,13 +50,13 @@
                 <h1></h1>
                 <p></p>
             </div>
-            <div id="highlightOverlay"></div>      
+            <div id="highlightOverlay"></div>
             <div class="button-container">
                 <button id="backButton" class="overlay-button">&#8592;</button>
-                <button id="nextButton" class="overlay-button">&#8594;</button>            
+                <button id="nextButton" class="overlay-button">&#8594;</button>
             </div>
         </div>
-        
+
         <div class="master-container">
             <div class="container">
                 <div class="info-icon-container">
@@ -87,7 +100,7 @@
                 </div>
                 <div id="infoText">
                     <div class="header-row">
-                        <h4 id="summaryHeader" >Segment Summary:</h4>
+                        <h4 id="summaryHeader">Segment Summary:</h4>
                     </div>
                     <div class="hr-row">
                         <hr>
@@ -101,11 +114,20 @@
         <div id="infoPopup">
             <div id="infoPopupContent">
                 <h2>About the Project</h2>
-                <p>Hi, my name is Thomas, welcome to my books project! This work attempts to visualize something many of us have felt or experienced - the ways in which a book might make us feel. How do great authors use cadence of emotions to make you laugh and then cry, and are there universal patterns for what "great" writing looks like?</p> 
-                <p>To study this, I borrowed some recent advancements in the computer science world of Natural Language Processing. Facebook's large language model BART lies at the core of this project for two primary tasks.</p>
+                <p>Hi, my name is Thomas, welcome to my books project! This work attempts to visualize something many of
+                    us have felt or experienced - the ways in which a book might make us feel. How do great authors use
+                    cadence of emotions to make you laugh and then cry, and are there universal patterns for what
+                    "great" writing looks like?</p>
+                <p>To study this, I borrowed some recent advancements in the computer science world of Natural Language
+                    Processing. Facebook's large language model BART lies at the core of this project for two primary
+                    tasks.</p>
                 <!-- <p>First, each paragraph in the book is split into relatively uniform length sections. This is done to avoid large paragraphs overflowing the memory of the GPU. Next, a bart-large checkpoint pretrained on the MultiNLI dataset is loaded and tasked with classifying how each section scores compared to the selected concept.</p> -->
-                <p>By plotting these points out and examining a moving average of their behavior, we can get a sense of how concepts are growing and evolving through the course of the book. Details on the implementation and the full code is publicly available for your convenience at <a href="https://github.com/trdougherty/literary_analysis" target="_blank">this GitHub repository</a>.</p>
-                
+                <p>By plotting these points out and examining a moving average of their behavior, we can get a sense of
+                    how concepts are growing and evolving through the course of the book. Details on the implementation
+                    and the full code is publicly available for your convenience at <a
+                        href="https://github.com/trdougherty/literary_analysis" target="_blank">this GitHub
+                        repository</a>.</p>
+
                 <h2>Contact Information</h2>
                 <p>For more information, connect with me on social media:</p>
                 <div class="social-links">
@@ -123,22 +145,33 @@
     <!-- Mobile content -->
     <div class="mobile-content">
         <h2>Mobile</h2>
-        <p>Thanks so much for visiting my site! This project is not meant to be viewed on mobile devices. For the full experience please view on a desktop or laptop computer.</p>
+        <p>Thanks so much for visiting my site! This project is not meant to be viewed on mobile devices. For the full
+            experience please view on a desktop or laptop computer.</p>
         <h2>About the Project</h2>
-        <p>This work attempts to visualize something many of us have felt or experienced - the ways in which a book might make us feel. To study this, I borrowed some recent advancements in the computer science world of Natural Language Processing. Facebook's large language model BART lies at the core of this project for two primary tasks. By plotting these points out and examining a moving average of their behavior, we can get a sense of how concepts are growing and evolving through the course of the book. As an example, the chart below shows the progression of the concept of "oppression" through the course of George Orwell's 1984.</p>
+        <p>This work attempts to visualize something many of us have felt or experienced - the ways in which a book
+            might make us feel. To study this, I borrowed some recent advancements in the computer science world of
+            Natural Language Processing. Facebook's large language model BART lies at the core of this project for two
+            primary tasks. By plotting these points out and examining a moving average of their behavior, we can get a
+            sense of how concepts are growing and evolving through the course of the book. As an example, the chart
+            below shows the progression of the concept of "oppression" through the course of George Orwell's 1984.</p>
 
         <figure>
             <img src="./oppression.png" alt="Oppression" style="width: 100%; height: auto;">
-            <figcaption>The image above is chaotic, with a number of sharp hills and valleys in the plot. By applying a moving average to the data, we can smooth out the plot and get a better sense of the overall trend.</figcaption>
-        </figure>
-        
-        <figure>
-            <img src="./oppression_smooth.png" alt="Oppression Smooth" style="width: 100%; height: auto;">
-            <figcaption>This image shows the same data as the first but with a moving average applied. The resulting plot is smoother, highlighting the overall trends more clearly and reducing the impact of short-term fluctuations.</figcaption>
+            <figcaption>The image above is chaotic, with a number of sharp hills and valleys in the plot. By applying a
+                moving average to the data, we can smooth out the plot and get a better sense of the overall trend.
+            </figcaption>
         </figure>
 
-        <p>Details on the implementation and the full code is publicly available for your convenience at <a href="https://github.com/trdougherty/literary_analysis" target="_blank">this GitHub repository</a>.</p>
-        
+        <figure>
+            <img src="./oppression_smooth.png" alt="Oppression Smooth" style="width: 100%; height: auto;">
+            <figcaption>This image shows the same data as the first but with a moving average applied. The resulting
+                plot is smoother, highlighting the overall trends more clearly and reducing the impact of short-term
+                fluctuations.</figcaption>
+        </figure>
+
+        <p>Details on the implementation and the full code is publicly available for your convenience at <a
+                href="https://github.com/trdougherty/literary_analysis" target="_blank">this GitHub repository</a>.</p>
+
         <h2>Contact Information</h2>
         <p>For more information, connect with me on social media:</p>
         <div class="social-links">
@@ -151,4 +184,5 @@
         </div>
     </div>
 </body>
+
 </html>
