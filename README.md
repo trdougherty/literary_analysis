@@ -1,5 +1,6 @@
 
-# [Storyline Structure Analysis](https://www.storylinestructure.com/) - https://www.storylinestructure.com/
+# [Storyline Structure Analysis](https://www.storylinestructure.com/)
+https://www.storylinestructure.com/
 
 ## Project Overview
 Storyline Structure Analysis is a project that visualizes the progression of complex concepts through the course of a book. Utilizing advanced Natural Language Processing techniques, it identifies and plots the ebbs and flows of themes like fear, hope, and oppression in literary works.
